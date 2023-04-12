@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2023 at 04:25 AM
+-- Generation Time: Apr 12, 2023 at 03:36 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.0.23
 
@@ -42,8 +42,8 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`ID_Barang`, `Nama`, `Varian`, `Stok`, `Harga`, `created_at`, `updated_at`) VALUES
-('IB-0001', 'Keripik', 'Pedas', 8, 'Rp. 20000', NULL, NULL),
-('IB-0002', 'Jagung', 'Pedas asin', 13, 'Rp. 20.000', NULL, NULL);
+('IB-0001', 'Keripik', 'Pedas', 7, 'Rp. 20000', NULL, NULL),
+('IB-0002', 'Jagung', 'Pedas', 20, 'Rp. 20.000', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -59,22 +59,6 @@ CREATE TABLE `barang_masuk` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `barang_masuk`
---
-
-INSERT INTO `barang_masuk` (`ID_Barang_Masuk`, `ID_Barang`, `Jumlah_Barang_Masuk`, `Tanggal_Barang_Masuk`, `created_at`, `updated_at`) VALUES
-(9, 'IB-0002', 2, '2023-01-19', NULL, NULL),
-(11, 'IB-0002', 10, '2023-01-30', NULL, NULL);
-
---
--- Triggers `barang_masuk`
---
-DELIMITER $$
-CREATE TRIGGER `tg_kurang_stok_barang` AFTER DELETE ON `barang_masuk` FOR EACH ROW begin update barang set Stok = Stok-OLD.Jumlah_Barang_Masuk where barang.ID_Barang=OLD.ID_Barang; END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -190,26 +174,6 @@ CREATE TABLE `sales` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `sales`
---
-
-INSERT INTO `sales` (`ID_Sales`, `ID_Barang`, `ID_Customer`, `Qty`, `Tanggal_Transaksi`, `Harga_Sales`, `Metode_Pembayaran`, `created_at`, `updated_at`) VALUES
-('IS-0001', 'IB-0001', 'IC-0001', 1, '2022-12-31', 'Rp. 20.000', 'Tunai', NULL, NULL),
-('IS-0002', 'IB-0002', 'IC-0002', 21, '2023-01-24', 'Rp. 20.000', 'Tunai', NULL, NULL),
-('IS-0003', 'IB-0002', 'IC-0002', 2, '2023-01-23', 'Rp. 20.000', 'Non Tunai', NULL, NULL),
-('IS-0004', 'IB-0001', 'IC-0002', 1, '2022-11-25', 'Rp. 8.000', 'Tunai', NULL, NULL),
-('IS-0005', 'IB-0001', 'IC-0001', 1, '2022-10-25', 'Rp. 20.000', 'Tunai', NULL, NULL),
-('IS-0006', 'IB-0001', 'IC-0002', 1, '2022-09-25', 'Rp. 20.000', 'Tunai', NULL, NULL),
-('IS-0007', 'IB-0001', 'IC-0001', 1, '2022-08-25', 'Rp. 20.000', 'Tunai', NULL, NULL),
-('IS-0008', 'IB-0001', 'IC-0001', 1, '2022-07-25', 'Rp. 20.000', 'Tunai', NULL, NULL),
-('IS-0009', 'IB-0001', 'IC-0002', 1, '2022-06-25', 'Rp. 10.000', 'Tunai', NULL, NULL),
-('IS-0010', 'IB-0001', 'IC-0002', 1, '2022-05-25', 'Rp. 10.000', 'Tunai', NULL, NULL),
-('IS-0011', 'IB-0002', 'IC-0002', 1, '2022-04-25', 'Rp. 20.000', 'Tunai', NULL, NULL),
-('IS-0012', 'IB-0001', 'IC-0001', 3, '2023-01-30', 'Rp. 50.000', 'Tunai', NULL, NULL),
-('IS-0013', 'IB-0001', 'IC-0001', 1, '2023-02-07', 'Rp. 20.000', 'Tunai', NULL, NULL),
-('IS-0014', 'IB-0001', 'IC-0002', 2, '2023-02-07', 'Rp.40.000', 'Non Tunai', NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -302,7 +266,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
-  MODIFY `ID_Barang_Masuk` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID_Barang_Masuk` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
